@@ -1,5 +1,7 @@
 import value.FullName
-import java.lang.AssertionError
+import value.ModelNumber
+import value.Money
+import value.User
 
 fun main() {
 
@@ -25,7 +27,7 @@ fun main() {
 
 fun valueObject() {
 
-    println("ValueクラスであるFullNameを実装")
+    println("-- ValueクラスであるFullNameを実装")
 
     val fullName1 = FullName("john", "smith")
     println(fullName1.fullName())
@@ -33,13 +35,31 @@ fun valueObject() {
     val fullName2 = FullName("john", "notSmith")
     // == はequalsメソッドを実行した結果を返す
     println("fullName1 equals fullName1 "+ (fullName1 == fullName1))
-    println("fullName1 equals fullName2 "+ (fullName1 == fullName2))
+    println("fullName1 equals fullName2 " + (fullName1 == fullName2))
 
 
-    println("コンストラクタでValidationをかける")
+    println("-- コンストラクタでValidationをかける")
     try {
         val badName = FullName("john", "notSmith3")
 
+    } catch (e: AssertionError) {
+        println("Error: $e")
+    }
+
+    println("-- 機能を持ったMoneyクラス")
+    val money1 = Money("JPY", 100)
+    val money2 = Money("JPY", 220)
+    println(money1.add(money2))
+
+    println("-- 製造番号クラス")
+    val modelNumber = ModelNumber("1234", "567", "9988")
+    println(modelNumber)
+
+    println("-- ユーザークラス")
+    val user = User.of(1234, "ユーザーの名前")
+    println(user)
+    try {
+        val user2 = User.of(5678, "名前")
     } catch (e: AssertionError) {
         println("Error: $e")
     }

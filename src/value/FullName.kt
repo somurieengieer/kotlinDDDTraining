@@ -7,6 +7,7 @@ package value
 internal class FullName (val firstName: String, val lastName: String) {
 
     // コンストラクタが動くタイミングで呼ばれる。プライマリコンストラクタを使う場合でも有効
+    // 呼ばれる順番は右記の通り　ー＞　プライマリコンストラクタ -> init -> コンストラクタ
     init {
         validate()
     }
