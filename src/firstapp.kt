@@ -1,7 +1,12 @@
+import domainService.TransportService
+import domainService.UserService
+import entity.Baggage
+import entity.PhysicalDistributionBase
+import entity.User
 import value.FullName
 import value.ModelNumber
 import value.Money
-import value.User
+import value.UserId
 
 fun main() {
 
@@ -23,6 +28,10 @@ fun main() {
     println("height is " + height + ", weight is " + weight)
 
     valueObject()
+
+    entityObject()
+
+    domainServiceObject()
 }
 
 fun valueObject() {
@@ -34,7 +43,7 @@ fun valueObject() {
 
     val fullName2 = FullName("john", "notSmith")
     // == はequalsメソッドを実行した結果を返す
-    println("fullName1 equals fullName1 "+ (fullName1 == fullName1))
+    println("fullName1 equals fullName1 " + (fullName1 == fullName1))
     println("fullName1 equals fullName2 " + (fullName1 == fullName2))
 
 
@@ -64,3 +73,27 @@ fun valueObject() {
         println("Error: $e")
     }
 }
+
+fun entityObject() {
+
+    println("Userクラス")
+    val user1 = User.of(1234, "ユーザー名")
+    println(user1)
+    val user2 = user1.changeUserName("変更後のユーザー名")
+    println(user2)
+}
+
+fun domainServiceObject() {
+
+    println("--ユーザーサービスクラス")
+    val userService = UserService()
+    println(userService.exists(UserId(111)))
+
+    println("--配送サービス")
+    val baggage = Baggage("配送される荷物")
+    val fromBase = PhysicalDistributionBase("拠点A")
+    val toBase = PhysicalDistributionBase("拠点B")
+    val transportService = TransportService()
+    transportService.transport(fromBase, toBase, baggage)
+}
+
