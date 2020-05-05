@@ -19,7 +19,7 @@ internal class User(val id: UserId, val name: UserName, val address: UserAddress
             )
         }
 
-        fun create(name: String, address: String?): User {
+        fun create(name: String, address: String? = null): User {
             return of(
                 UUID.randomUUID().toString(),
                 name,

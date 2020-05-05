@@ -7,7 +7,7 @@ import domain.value.Money
 import domain.value.UserId
 import infrastracture.UserRepository
 import infrastracture.inmemory.InMemoryUserRepository
-import service.application.UserApplicationService
+import service.application.UserRegisterService
 import service.domain.TransportService
 import service.domain.UserService
 
@@ -146,7 +146,7 @@ fun repository() {
 fun applicationService() {
     println()
     println("-- ユーザーアプリケーションサービス。ユーザー作成")
-    val userApplicationService = UserApplicationService()
+    val userApplicationService = UserRegisterService()
     val userName = "ユーザー名テスト"
     val user = userApplicationService.register(userName)
     println("created user: $user")
