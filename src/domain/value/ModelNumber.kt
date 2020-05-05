@@ -1,4 +1,4 @@
-package value
+package domain.value
 
 internal class ModelNumber(val productCode: String, val branch: String, val lot: String) {
     init {

@@ -1,4 +1,4 @@
-package entity
+package domain.entity
 
 internal class PhysicalDistributionBase(val baseName: String) {
 

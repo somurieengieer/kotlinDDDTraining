@@ -1,12 +1,15 @@
-import domainService.TransportService
-import domainService.UserService
-import entity.Baggage
-import entity.PhysicalDistributionBase
-import entity.User
-import value.FullName
-import value.ModelNumber
-import value.Money
-import value.UserId
+import domain.entity.Baggage
+import domain.entity.PhysicalDistributionBase
+import domain.entity.User
+import domain.value.FullName
+import domain.value.ModelNumber
+import domain.value.Money
+import domain.value.UserId
+import infrastracture.UserRepository
+import infrastracture.inmemory.InMemoryUserRepository
+import service.application.UserApplicationService
+import service.domain.TransportService
+import service.domain.UserService
 
 fun main() {
 
@@ -32,6 +35,10 @@ fun main() {
     entityObject()
 
     domainServiceObject()
+
+    repository()
+
+    applicationService()
 }
 
 fun valueObject() {
@@ -65,10 +72,10 @@ fun valueObject() {
     println(modelNumber)
 
     println("-- ユーザークラス")
-    val user = User.of(1234, "ユーザーの名前")
+    val user = User.of("1234", "ユーザーの名前")
     println(user)
     try {
-        val user2 = User.of(5678, "名前")
+        val user2 = User.of("5678", "名前")
     } catch (e: AssertionError) {
         println("Error: $e")
     }
@@ -76,18 +83,20 @@ fun valueObject() {
 
 fun entityObject() {
 
+    println()
     println("Userクラス")
-    val user1 = User.of(1234, "ユーザー名")
+    val user1 = User.of("1234", "ユーザー名")
     println(user1)
-    val user2 = user1.changeUserName("変更後のユーザー名")
+    val user2 = user1.changeName("変更後のユーザー名")
     println(user2)
 }
 
 fun domainServiceObject() {
 
+    println()
     println("--ユーザーサービスクラス")
-    val userService = UserService()
-    println(userService.exists(UserId(111)))
+    val userService = UserService(UserRepository())
+    println(userService.exists(UserId("111")))
 
     println("--配送サービス")
     val baggage = Baggage("配送される荷物")
@@ -95,5 +104,56 @@ fun domainServiceObject() {
     val toBase = PhysicalDistributionBase("拠点B")
     val transportService = TransportService()
     transportService.transport(fromBase, toBase, baggage)
+}
+
+fun repository() {
+
+    println()
+    println("-- ユーザーリポジトリ")
+    val userService = UserService(UserRepository())
+    val user1 = User.of("111", "スズキ太郎")
+    val user2 = User.of("222", "スズキ二郎")
+    println("register: $user1")
+    userService.register(user1)
+    println("${user1.id} exists: ${userService.exists(user1.id)}")
+    println("${user2.id} exists: ${userService.exists(user2.id)}")
+    println("${user1.id} is: ${userService.find(user1.id)}")
+    println("${user2.id} is: ${userService.find(user2.id)}")
+    println("delete: $user1")
+    userService.delete(user1)
+    println("${user1.id} is: ${userService.find(user1.id)}")
+
+    println("-- ユーザーリポジトリInMemoryテスト")
+    val userServiceTest = UserService(InMemoryUserRepository())
+    println("register: $user1")
+    userServiceTest.register(user1)
+    println("${user1.id} exists: ${userServiceTest.exists(user1.id)}")
+    println("${user2.id} exists: ${userServiceTest.exists(user2.id)}")
+    println("${user1.id} is: ${userServiceTest.find(user1.id)}")
+    println("${user2.id} is: ${userServiceTest.find(user2.id)}")
+    println("register: $user2")
+    userServiceTest.register(user2)
+    val allUser = userServiceTest.findAll()
+    val allUserNames = allUser.joinToString()
+    println("allUser are $allUserNames")
+    println("delete: $user1")
+    userServiceTest.delete(user1)
+    println("${user1.id} is: ${userServiceTest.find(user1.id)}")
+    println("${user2.id} is: ${userServiceTest.find(user2.id)}")
+
+}
+
+fun applicationService() {
+    println()
+    println("-- ユーザーアプリケーションサービス。ユーザー作成")
+    val userApplicationService = UserApplicationService()
+    val userName = "ユーザー名テスト"
+    val user = userApplicationService.register(userName)
+    println("created user: $user")
+    try {
+        userApplicationService.register(userName)
+    } catch (e: AssertionError) {
+        println("ユーザー（$user）は登録済みのため登録エラー。$e")
+    }
 }
 

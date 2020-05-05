@@ -1,4 +1,4 @@
-package value
+package domain.value
 
 internal class Money(val currency: String, val value: Long) {
 

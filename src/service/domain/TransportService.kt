@@ -1,7 +1,7 @@
-package domainService
+package service.domain
 
-import entity.Baggage
-import entity.PhysicalDistributionBase
+import domain.entity.Baggage
+import domain.entity.PhysicalDistributionBase
 
 internal class TransportService {
 

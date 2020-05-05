@@ -1,4 +1,4 @@
-package value
+package domain.value
 
 // 何も付けないとpublic扱いになる。どこからでもアクセス可能。スコープが広すぎる
 // internalは同一モジュールから参照可能。同一モジュールは一度にコンパイルされるファイル群内を指す
