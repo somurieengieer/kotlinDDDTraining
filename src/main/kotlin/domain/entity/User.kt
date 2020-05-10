@@ -1,14 +1,17 @@
 package main.kotlin.domain.entity
 
-import main.kotlin.domain.value.UserAddress
-import main.kotlin.domain.value.UserId
-import main.kotlin.domain.value.UserName
+import main.kotlin.domain.value.circle.CircleName
+import main.kotlin.domain.value.user.UserAddress
+import main.kotlin.domain.value.user.UserId
+import main.kotlin.domain.value.user.UserName
 import java.util.*
 
 
-internal class User(val id: UserId, val name: UserName, val address: UserAddress? = null) {
+class User(val id: UserId, val name: UserName, val address: UserAddress? = null) {
 
     // TODO: コンストラクタをprivateにしてstaticなファクトリメソッドだけをpublicにできないか？
+
+    val isPremium: Boolean = true // Dummy（premiumの実装は後回し。一旦全員premium会員とする
 
     companion object {
         fun of(id: String, name: String, address: String? = null): User {
@@ -34,6 +37,14 @@ internal class User(val id: UserId, val name: UserName, val address: UserAddress
 
     fun changeAddress(changedAddress: String): User {
         return User(id, name, UserAddress(changedAddress))
+    }
+
+    fun createCircle(circleName: CircleName): Circle {
+        return Circle.of(id, circleName)
+    }
+
+    fun joinCircle(circle: Circle) {
+        circle.addUser(this)
     }
 
     override fun equals(other: Any?): Boolean {

@@ -1,6 +1,6 @@
 package test.service.applications
 
-import main.kotlin.service.application.UserRegisterService
+import main.kotlin.service.application.user.UserRegisterService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

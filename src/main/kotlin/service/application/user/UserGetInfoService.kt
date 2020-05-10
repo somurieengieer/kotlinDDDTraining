@@ -1,13 +1,13 @@
-package main.kotlin.service.application
+package main.kotlin.service.application.user
 
-import main.kotlin.domain.value.UserId
-import main.kotlin.domain.value.UserName
+import main.kotlin.domain.value.user.UserId
+import main.kotlin.domain.value.user.UserName
 import main.kotlin.infrastracture.UserRepository
 import main.kotlin.service.domain.UserService
 import main.kotlin.service.presentation.dto.UserData
 import main.kotlin.service.repository.IUserRepository
 
-internal class UserFindService {
+internal class UserGetInfoService {
 
     private val userRepository: IUserRepository = UserRepository()
 
@@ -20,5 +20,9 @@ internal class UserFindService {
 
     fun get(userName: UserName): UserData? {
         return userRepository.findByName(userName)?.let { user -> UserData.of(user) }
+    }
+
+    fun getAllUsers(): List<UserData> {
+        return userRepository.findAll().map { user -> UserData.of(user) }
     }
 }

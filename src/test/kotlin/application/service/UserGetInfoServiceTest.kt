@@ -1,13 +1,13 @@
 package test.service.applications
 
 import main.kotlin.domain.entity.User
-import main.kotlin.domain.value.UserName
-import main.kotlin.service.application.UserFindService
+import main.kotlin.domain.value.user.UserName
+import main.kotlin.service.application.user.UserGetInfoService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
-internal class UserFindServiceTest : UserServiceCommonTest() {
+internal class UserGetInfoServiceTest : UserServiceCommonTest() {
 
     @Test
     fun get_success() {
@@ -15,7 +15,7 @@ internal class UserFindServiceTest : UserServiceCommonTest() {
         val user = User.create(userName)
         addDB(user)
 
-        val userFindService = UserFindService()
+        val userFindService = UserGetInfoService()
 
         val gottenUser = userFindService.get(UserName(userName))
         assertNotNull(gottenUser)

@@ -13,4 +13,8 @@ internal data class UserData(val id: String, val name: String, val address: Stri
             )
         }
     }
+
+    override fun toString(): String {
+        return "User(id:$id, name:$name, address:$address"
+    }
 }

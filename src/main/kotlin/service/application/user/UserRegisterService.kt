@@ -1,4 +1,4 @@
-package main.kotlin.service.application
+package main.kotlin.service.application.user
 
 import main.kotlin.domain.entity.User
 import main.kotlin.infrastracture.UserRepository

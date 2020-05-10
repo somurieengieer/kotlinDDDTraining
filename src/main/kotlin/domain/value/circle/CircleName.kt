@@ -1,16 +1,13 @@
-package main.kotlin.domain.value
+package main.kotlin.domain.value.circle
 
-internal class UserName(val name: String) {
+class CircleName(val name: String) {
+
     init {
-        validate()
+        validation()
     }
 
-    private fun validate() {
-        takeUnless { name.length >= 3 }?.apply { throw AssertionError("ユーザー名は3文字以上です。") }
-    }
-
-    override fun toString(): String {
-        return name
+    private fun validation() {
+        takeUnless { name.length >= 3 }?.let { throw AssertionError("サークル名は３文字以上です") }
     }
 
     fun value(): String {
@@ -21,7 +18,7 @@ internal class UserName(val name: String) {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as UserName
+        other as CircleName
 
         if (name != other.name) return false
 
@@ -31,4 +28,6 @@ internal class UserName(val name: String) {
     override fun hashCode(): Int {
         return name.hashCode()
     }
+
+
 }

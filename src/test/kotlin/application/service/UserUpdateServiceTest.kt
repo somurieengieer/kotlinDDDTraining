@@ -1,8 +1,8 @@
 package test.service.applications
 
 import main.kotlin.domain.entity.User
-import main.kotlin.service.application.UserUpdateService
 import main.kotlin.service.application.command.UserAppCommand
+import main.kotlin.service.application.user.UserUpdateService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test

@@ -1,9 +1,9 @@
 package main.kotlin.infrastracture
 
 import main.kotlin.domain.entity.User
-import main.kotlin.domain.value.UserAddress
-import main.kotlin.domain.value.UserId
-import main.kotlin.domain.value.UserName
+import main.kotlin.domain.value.user.UserAddress
+import main.kotlin.domain.value.user.UserId
+import main.kotlin.domain.value.user.UserName
 import main.kotlin.service.repository.IUserRepository
 
 // DBの代わり

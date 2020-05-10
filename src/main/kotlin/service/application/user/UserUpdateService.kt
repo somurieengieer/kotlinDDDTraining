@@ -1,6 +1,6 @@
-package main.kotlin.service.application
+package main.kotlin.service.application.user
 
-import main.kotlin.domain.value.UserId
+import main.kotlin.domain.value.user.UserId
 import main.kotlin.infrastracture.UserRepository
 import main.kotlin.service.application.command.UserAppCommand
 import main.kotlin.service.domain.UserService

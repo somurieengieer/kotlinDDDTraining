@@ -1,34 +1,34 @@
-package main.kotlin.domain.value
+package main.kotlin.domain.value.user
 
-internal class UserId(val id: String) {
+class UserName(val name: String) {
     init {
         validate()
     }
 
     private fun validate() {
-        takeUnless { id.length >= 3 }?.apply { throw AssertionError("ユーザーIDは3桁以上です。") }
+        takeUnless { name.length >= 3 }?.apply { throw AssertionError("ユーザー名は3文字以上です。") }
     }
 
     override fun toString(): String {
-        return id.toString()
+        return name
     }
 
     fun value(): String {
-        return id
+        return name
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as UserId
+        other as UserName
 
-        if (id != other.id) return false
+        if (name != other.name) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return id.hashCode()
+        return name.hashCode()
     }
 }
