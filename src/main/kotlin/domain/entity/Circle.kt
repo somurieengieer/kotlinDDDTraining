@@ -7,7 +7,7 @@ import main.kotlin.infrastracture.CircleRepository
 import main.kotlin.service.domain.CircleService
 import main.kotlin.service.repository.ICircleRepository
 
-class Circle(val circleId: CircleId?, val creatorId: UserId, val circleName: CircleName, val members: List<User>) {
+class Circle(val circleId: CircleId?, val creatorId: UserId, val circleName: CircleName, val members: CircleMembers) {
 
     private val circleRepository: ICircleRepository = CircleRepository()
 
@@ -15,21 +15,17 @@ class Circle(val circleId: CircleId?, val creatorId: UserId, val circleName: Cir
 
     companion object {
         fun of(userId: UserId, circleName: CircleName): Circle {
-            return Circle(null, userId, circleName, emptyList())
+            return Circle(null, userId, circleName, CircleMembers.empty())
         }
 
-        fun of(circleId: CircleId, userId: UserId, circleName: CircleName, members: List<User>): Circle {
+        fun of(circleId: CircleId, userId: UserId, circleName: CircleName, members: CircleMembers): Circle {
             return Circle(circleId, userId, circleName, members)
         }
     }
 
     fun addUser(user: User): Circle {
-        val newMembers = listOf(listOf(user), members).flatten()
+        val newMembers = members.addUser(user)
         return Circle(circleId, creatorId, circleName, newMembers)
-    }
-
-    private fun countMembers(): Int {
-        return members.size
     }
 
     override fun equals(other: Any?): Boolean {
@@ -46,6 +42,4 @@ class Circle(val circleId: CircleId?, val creatorId: UserId, val circleName: Cir
     override fun hashCode(): Int {
         return circleId?.hashCode() ?: 0
     }
-
-
 }

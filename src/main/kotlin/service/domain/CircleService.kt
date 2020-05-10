@@ -20,8 +20,8 @@ class CircleService(private val circleRepository: ICircleRepository) {
 
     fun addUser(circle: Circle, user: User) {
 
-        if (!circleFullSpecification.isSatisfiedBy(circle)) {
-            val upperLimit = circleFullSpecification.circleUpperLimit(circle)
+        if (!circleFullSpecification.isSatisfiedBy(circle.members)) {
+            val upperLimit = circleFullSpecification.circleUpperLimit(circle.members)
             throw AssertionError("サークルに参加できる人数は${upperLimit}人以下です")
         }
 

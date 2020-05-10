@@ -1,6 +1,7 @@
 package test.service.applications
 
 import main.kotlin.domain.entity.Circle
+import main.kotlin.domain.entity.CircleMembers
 import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.circle.CircleId
 import main.kotlin.domain.value.circle.CircleName
@@ -42,7 +43,7 @@ internal open class CircleServiceCommonTest {
         val circleId = CircleId("circle1")
         val creatorId = UserId("1111")
         val circleName = CircleName("サークル名")
-        val circle = Circle.of(circleId, creatorId, circleName, emptyList())
+        val circle = Circle.of(circleId, creatorId, circleName, CircleMembers.empty())
         circleDB.insert(circle)
         return circle
     }

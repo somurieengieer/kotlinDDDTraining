@@ -44,6 +44,6 @@ internal class CircleRegisterServiceTest : CircleServiceCommonTest() {
 
         service.addMember(circle, member)
 
-        assertEquals(CircleDB.getCircle(circle.circleId!!)!!.members[0], member)
+        assertEquals(CircleDB.getCircle(circle.circleId!!)!!.members.list()[0], member)
     }
 }
