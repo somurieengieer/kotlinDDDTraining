@@ -1,22 +1,24 @@
 package main.kotlin.domain.entity
 
-class CircleMembers(val users: List<User>) {
+import main.kotlin.domain.value.circle.CircleId
+
+class CircleMembers(private val circleId: CircleId?, val owner: User, val users: List<User>) {
     companion object {
-        fun of(users: List<User>): CircleMembers {
-            return CircleMembers(users)
+        fun of(circleId: CircleId?, owner: User, users: List<User>): CircleMembers {
+            return CircleMembers(circleId, owner, users)
         }
 
-        fun empty(): CircleMembers {
-            return CircleMembers(emptyList())
+        fun empty(circleId: CircleId?, owner: User): CircleMembers {
+            return CircleMembers(circleId, owner, emptyList())
         }
     }
 
     fun addUser(user: User): CircleMembers {
-        return of(listOf(users, listOf(user)).flatten())
+        return of(circleId, owner, listOf(users, listOf(user)).flatten())
     }
 
-    fun size(): Int {
-        return users.size
+    fun countMembers(): Int {
+        return users.size + 1
     }
 
     fun list(): List<User> {

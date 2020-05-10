@@ -5,9 +5,12 @@ import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.circle.CircleName
 import main.kotlin.domain.value.user.UserId
 import main.kotlin.infrastracture.CircleRepository
+import main.kotlin.infrastracture.UserRepository
 import main.kotlin.service.application.circle.command.CircleCreateCommand
 import main.kotlin.service.domain.CircleService
+import main.kotlin.service.domain.UserService
 import main.kotlin.service.repository.ICircleRepository
+import main.kotlin.service.repository.IUserRepository
 
 class CircleRegisterService {
 
@@ -15,10 +18,18 @@ class CircleRegisterService {
 
     private val circleService = CircleService(circleRepository)
 
+    private val userRepository: IUserRepository = UserRepository()
+
+    private val userService = UserService(userRepository)
+
     fun register(command: CircleCreateCommand) {
+
+        val owner = userService.find(UserId(command.userId))
+            ?: throw AssertionError("ユーザーが存在しません")
+
         circleService.register(
             Circle.of(
-                UserId(command.userId),
+                owner,
                 CircleName(command.circleName)
             )
         )

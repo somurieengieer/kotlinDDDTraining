@@ -40,7 +40,7 @@ class User(val id: UserId, val name: UserName, val address: UserAddress? = null)
     }
 
     fun createCircle(circleName: CircleName): Circle {
-        return Circle.of(id, circleName)
+        return Circle.of(this, circleName)
     }
 
     fun joinCircle(circle: Circle) {

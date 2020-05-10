@@ -9,7 +9,7 @@ class CircleFullSpecification {
     private val userRepository: IUserRepository = UserRepository()
 
     fun isSatisfiedBy(circleMembers: CircleMembers): Boolean {
-        return circleMembers.size() + 1 < circleUpperLimit(circleMembers)
+        return circleMembers.countMembers() < circleUpperLimit(circleMembers)
     }
 
     fun circleUpperLimit(circleMembers: CircleMembers): Int {

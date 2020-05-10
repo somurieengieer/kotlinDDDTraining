@@ -1,6 +1,5 @@
 package service.application.circle
 
-import main.kotlin.domain.entity.User
 import main.kotlin.infrastracture.CircleDB
 import main.kotlin.service.application.circle.CircleRegisterService
 import main.kotlin.service.application.circle.command.CircleCreateCommand
@@ -12,13 +11,15 @@ internal class CircleRegisterServiceTest : CircleServiceCommonTest() {
 
     @Test
     fun register() {
-        val service = CircleRegisterService()
         val creatorId = "1111"
+        val user = createUser(creatorId)
         val circleName = "サークル名"
+
+        val service = CircleRegisterService()
         service.register(CircleCreateCommand(creatorId, circleName))
 
         assertEquals(CircleDB.getAll().size, 1)
-        assertEquals(CircleDB.getAll()[0].creatorId.value(), creatorId)
+        assertEquals(CircleDB.getAll()[0].owner().id.value(), creatorId)
         assertEquals(CircleDB.getAll()[0].circleName.value(), circleName)
     }
 
@@ -26,6 +27,7 @@ internal class CircleRegisterServiceTest : CircleServiceCommonTest() {
     fun register_failed() {
         val service = CircleRegisterService()
         val creatorId = "1111"
+        createUser(creatorId)
         val circleName = "サー"
         try {
             service.register(CircleCreateCommand(creatorId, circleName))
@@ -38,7 +40,7 @@ internal class CircleRegisterServiceTest : CircleServiceCommonTest() {
     @Test
     fun addMember() {
         val circle = createCircle()
-        val member = User.of("2222", "作成者１", "住所１")
+        val member = createUser("2222")
 
         val service = CircleRegisterService()
 

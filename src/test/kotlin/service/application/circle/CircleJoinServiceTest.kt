@@ -21,7 +21,7 @@ internal class CircleJoinServiceTest : CircleServiceCommonTest() {
 
         val userList = circleDB.getCircle(circle.circleId!!)!!.members
 
-        assertEquals(userList.size(), 1)
+        assertEquals(userList.countMembers(), 2)
         assertEquals(userList.list()[0], addUser)
     }
 
@@ -44,6 +44,6 @@ internal class CircleJoinServiceTest : CircleServiceCommonTest() {
         }
 
         // 代表を除くと49人
-        assertEquals(circleDB.getCircle(circle.circleId!!)!!.members.size(), 49)
+        assertEquals(circleDB.getCircle(circle.circleId!!)!!.members.countMembers(), 50)
     }
 }

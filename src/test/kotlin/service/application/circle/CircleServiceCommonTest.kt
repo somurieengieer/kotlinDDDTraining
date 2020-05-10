@@ -5,7 +5,6 @@ import main.kotlin.domain.entity.CircleMembers
 import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.circle.CircleId
 import main.kotlin.domain.value.circle.CircleName
-import main.kotlin.domain.value.user.UserId
 import main.kotlin.infrastracture.CircleDB
 import main.kotlin.infrastracture.UserDB
 import org.junit.jupiter.api.BeforeEach
@@ -41,10 +40,16 @@ internal open class CircleServiceCommonTest {
 
     fun createCircle(): Circle {
         val circleId = CircleId("circle1")
-        val creatorId = UserId("1111")
+        val owner = User.of("1111", "オーナー名", "address_value")
+        val circleMembers = CircleMembers.of(circleId, owner, emptyList())
         val circleName = CircleName("サークル名")
-        val circle = Circle.of(circleId, creatorId, circleName, CircleMembers.empty())
+        val circle = Circle.of(circleId, circleName, circleMembers)
         circleDB.insert(circle)
         return circle
+    }
+
+    fun createUser(id: String): User {
+        return User.of(id, "テストユーザー$id", "address$id")
+            .also { addUserDB(it) }
     }
 }
