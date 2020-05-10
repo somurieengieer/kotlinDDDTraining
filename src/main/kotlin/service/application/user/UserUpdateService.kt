@@ -20,6 +20,6 @@ internal class UserUpdateService {
             .let { command.name?.let { name -> it.changeName(name) } ?: it }
             .let { command.address?.let { address -> it.changeAddress(address) } ?: it }
 
-        return userService.register(user).let { user -> UserData.of(user) }
+        return userService.register(user).let { u -> UserData.of(u) }
     }
 }

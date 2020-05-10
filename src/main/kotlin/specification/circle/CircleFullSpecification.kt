@@ -3,12 +3,13 @@ package main.kotlin.specification.circle
 import main.kotlin.domain.entity.CircleMembers
 import main.kotlin.infrastracture.UserRepository
 import main.kotlin.service.repository.IUserRepository
+import main.kotlin.specification.ISpecification
 
-class CircleFullSpecification {
+class CircleFullSpecification : ISpecification<CircleMembers> {
 
     private val userRepository: IUserRepository = UserRepository()
 
-    fun isSatisfiedBy(circleMembers: CircleMembers): Boolean {
+    override fun isSatisfiedBy(circleMembers: CircleMembers): Boolean {
         return circleMembers.countMembers() < circleUpperLimit(circleMembers)
     }
 
@@ -18,10 +19,4 @@ class CircleFullSpecification {
         }
         return 30
     }
-
-//    private fun premiumMemberSum(circle: Circle): Int {
-//        return circle.members
-//            .map { user -> userRepository.find(user.id)!! }
-//            .count { user -> user.isPremium }
-//    }
 }

@@ -5,6 +5,7 @@ import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.circle.CircleId
 import main.kotlin.service.repository.ICircleRepository
 import main.kotlin.specification.circle.CircleFullSpecification
+import main.kotlin.specification.circle.CircleRecommendSpecification
 
 class CircleService(private val circleRepository: ICircleRepository) {
 
@@ -16,6 +17,12 @@ class CircleService(private val circleRepository: ICircleRepository) {
 
     fun find(circleId: CircleId): Circle? {
         return circleRepository.find(circleId)
+    }
+
+    fun findRecommend(): List<Circle> {
+        return circleRepository.find(
+            listOf(CircleRecommendSpecification())
+        )
     }
 
     fun addUser(circle: Circle, user: User) {

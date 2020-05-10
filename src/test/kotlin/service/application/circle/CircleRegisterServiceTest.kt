@@ -12,7 +12,7 @@ internal class CircleRegisterServiceTest : CircleServiceCommonTest() {
     @Test
     fun register() {
         val creatorId = "1111"
-        val user = createUser(creatorId)
+        createUser(creatorId)
         val circleName = "サークル名"
 
         val service = CircleRegisterService()
@@ -39,7 +39,7 @@ internal class CircleRegisterServiceTest : CircleServiceCommonTest() {
 
     @Test
     fun addMember() {
-        val circle = createCircle()
+        val circle = createCircle("111")
         val member = createUser("2222")
 
         val service = CircleRegisterService()

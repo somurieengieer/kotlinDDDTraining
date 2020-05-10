@@ -29,6 +29,11 @@ internal open class CircleServiceCommonTest {
         return circle
     }
 
+    fun updateCircle(circle: Circle): Circle {
+        circleDB.delete(circle)
+        return addCircleDB(circle)
+    }
+
     fun addUserDB(user: User): User {
         userDB.insert(user)
         return user
@@ -38,11 +43,11 @@ internal open class CircleServiceCommonTest {
         return circleDB.getAll()
     }
 
-    fun createCircle(): Circle {
-        val circleId = CircleId("circle1")
+    fun createCircle(circleIdStr: String): Circle {
+        val circleId = CircleId(circleIdStr)
         val owner = User.of("1111", "オーナー名", "address_value")
         val circleMembers = CircleMembers.of(circleId, owner, emptyList())
-        val circleName = CircleName("サークル名")
+        val circleName = CircleName("サークル$circleId")
         val circle = Circle.of(circleId, circleName, circleMembers)
         circleDB.insert(circle)
         return circle

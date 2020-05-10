@@ -3,6 +3,7 @@ package main.kotlin.infrastracture
 import main.kotlin.domain.entity.Circle
 import main.kotlin.domain.value.circle.CircleId
 import main.kotlin.service.repository.ICircleRepository
+import main.kotlin.specification.ISpecification
 
 // DBの代わり
 internal object CircleDB {
@@ -46,5 +47,11 @@ internal class CircleRepository : ICircleRepository {
 
     override fun find(circleId: CircleId): Circle? {
         return circleDB.getAll().find { c -> c.circleId == circleId }
+    }
+
+    override fun find(specs: List<ISpecification<Circle>>): List<Circle> {
+        return circleDB.getAll().filter { circle ->
+            specs.all { spec -> spec.isSatisfiedBy(circle) }
+        }
     }
 }

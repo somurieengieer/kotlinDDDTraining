@@ -11,7 +11,7 @@ internal class CircleJoinServiceTest : CircleServiceCommonTest() {
 
     @Test
     fun join() {
-        val circle = createCircle()
+        val circle = createCircle("111")
 
         val addUser = User.of("2222", "名前１")
         userDB.insert(addUser)
@@ -27,7 +27,7 @@ internal class CircleJoinServiceTest : CircleServiceCommonTest() {
 
     @Test
     fun join_failed() {
-        val circle = createCircle()
+        val circle = createCircle("111")
 
         val service = CircleJoinService()
 

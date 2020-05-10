@@ -21,7 +21,7 @@ internal class UserRegisterServiceTest : UserServiceCommonTest() {
     fun register_failed_because_of_duplicate_userName() {
         val userApplicationService = UserRegisterService()
         val userName = "ユーザー名テスト"
-        val user = userApplicationService.register(userName)
+        userApplicationService.register(userName)
 
         try {
             userApplicationService.register(userName)
@@ -36,7 +36,7 @@ internal class UserRegisterServiceTest : UserServiceCommonTest() {
         val userApplicationService = UserRegisterService()
         val name = "ユーザー名テスト"
         val address = "住所１"
-        val userData = userApplicationService.register(name, address)
+        userApplicationService.register(name, address)
 
         try {
             val name2 = "ユーザー名テスト２"
