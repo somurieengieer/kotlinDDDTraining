@@ -1,4 +1,4 @@
-package main.kotlin.infrastracture
+package main.kotlin.infrastracture.postgres.user
 
 import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.user.UserAddress
@@ -30,33 +30,34 @@ internal object UserDB {
 
 internal class UserRepository : IUserRepository {
 
-    private val userDB: UserDB = UserDB
+    private val userDB: UserDB =
+        UserDB
 
     override fun register(user: User): User {
-        if (userDB.getAll().contains(user)) {
+        if (UserDB.getAll().contains(user)) {
             this.delete(user)
         }
-        userDB.insert(user)
+        UserDB.insert(user)
         return user
     }
 
     override fun find(userId: UserId): User? {
-        return userDB.getAll().find { user -> user.id == userId }
+        return UserDB.getAll().find { user -> user.id == userId }
     }
 
     override fun findByName(userName: UserName): User? {
-        return userDB.getAll().find { user -> user.name == userName }
+        return UserDB.getAll().find { user -> user.name == userName }
     }
 
     override fun findByAddress(userAddress: UserAddress): User? {
-        return userDB.getAll().find { user -> user.address == userAddress }
+        return UserDB.getAll().find { user -> user.address == userAddress }
     }
 
     override fun findAll(): List<User> {
-        return userDB.getAll()
+        return UserDB.getAll()
     }
 
     override fun delete(user: User) {
-        userDB.delete(user)
+        UserDB.delete(user)
     }
 }

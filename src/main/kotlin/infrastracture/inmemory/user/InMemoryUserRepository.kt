@@ -1,4 +1,4 @@
-package main.kotlin.infrastracture.inmemory
+package main.kotlin.infrastracture.inmemory.user
 
 import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.user.UserAddress

@@ -7,8 +7,8 @@ import main.kotlin.domain.value.FullName
 import main.kotlin.domain.value.ModelNumber
 import main.kotlin.domain.value.Money
 import main.kotlin.domain.value.user.UserId
-import main.kotlin.infrastracture.UserRepository
-import main.kotlin.infrastracture.inmemory.InMemoryUserRepository
+import main.kotlin.infrastracture.inmemory.user.InMemoryUserRepository
+import main.kotlin.infrastracture.postgres.user.UserRepository
 import main.kotlin.service.application.user.UserRegisterService
 import main.kotlin.service.domain.TransportService
 import main.kotlin.service.domain.UserService

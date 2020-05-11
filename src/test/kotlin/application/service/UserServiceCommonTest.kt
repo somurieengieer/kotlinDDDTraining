@@ -1,7 +1,7 @@
 package test.service.applications
 
 import main.kotlin.domain.entity.User
-import main.kotlin.infrastracture.UserDB
+import main.kotlin.infrastracture.postgres.user.UserDB
 import org.junit.jupiter.api.BeforeEach
 
 internal open class UserServiceCommonTest {

@@ -1,6 +1,6 @@
 package service.application.circle
 
-import main.kotlin.infrastracture.CircleDB
+import main.kotlin.infrastracture.postgres.circle.CircleDB
 import main.kotlin.service.application.circle.CircleRegisterService
 import main.kotlin.service.application.circle.command.CircleCreateCommand
 import org.junit.jupiter.api.Assertions.assertEquals

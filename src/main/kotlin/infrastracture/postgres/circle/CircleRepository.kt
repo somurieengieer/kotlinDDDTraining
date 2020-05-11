@@ -1,4 +1,4 @@
-package main.kotlin.infrastracture
+package main.kotlin.infrastracture.postgres.circle
 
 import main.kotlin.domain.entity.Circle
 import main.kotlin.domain.value.circle.CircleId
@@ -36,21 +36,21 @@ internal class CircleRepository : ICircleRepository {
     private val circleDB = CircleDB
 
     override fun create(circle: Circle): Circle {
-        circleDB.insert(circle)
+        CircleDB.insert(circle)
         return circle
     }
 
     override fun update(circle: Circle): Circle {
-        circleDB.delete(circle)
+        CircleDB.delete(circle)
         return create(circle)
     }
 
     override fun find(circleId: CircleId): Circle? {
-        return circleDB.getAll().find { c -> c.circleId == circleId }
+        return CircleDB.getAll().find { c -> c.circleId == circleId }
     }
 
     override fun find(specs: List<ISpecification<Circle>>): List<Circle> {
-        return circleDB.getAll().filter { circle ->
+        return CircleDB.getAll().filter { circle ->
             specs.all { spec -> spec.isSatisfiedBy(circle) }
         }
     }

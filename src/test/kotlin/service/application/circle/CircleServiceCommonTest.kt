@@ -5,8 +5,8 @@ import main.kotlin.domain.entity.CircleMembers
 import main.kotlin.domain.entity.User
 import main.kotlin.domain.value.circle.CircleId
 import main.kotlin.domain.value.circle.CircleName
-import main.kotlin.infrastracture.CircleDB
-import main.kotlin.infrastracture.UserDB
+import main.kotlin.infrastracture.postgres.circle.CircleDB
+import main.kotlin.infrastracture.postgres.user.UserDB
 import org.junit.jupiter.api.BeforeEach
 
 internal open class CircleServiceCommonTest {
